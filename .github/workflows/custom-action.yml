@@ -1,0 +1,17 @@
+name: Test Custom Greeting Action
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run greeting action
+        uses: pasha6063/hello-greeting-action@v1.0.0
+        with:
+          name: "Ghazanfar Pasha"
