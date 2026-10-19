@@ -1,6 +1,8 @@
 name: Multi OS
 
-on: [push, workflow_dispatch]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   os-check:
