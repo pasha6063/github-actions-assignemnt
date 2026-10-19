@@ -1,0 +1,24 @@
+name: Matrix Build
+
+on: [push, workflow_dispatch]
+
+jobs:
+  python-matrix:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.11', '3.12']
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - run: python --version
+
+      - run: python -c "print('Matrix combination passed')"
