@@ -1,6 +1,6 @@
 name: Multi OS
 
-on:
+'on':
   push:
   workflow_dispatch:
 
