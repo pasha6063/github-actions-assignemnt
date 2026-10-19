@@ -1,0 +1,25 @@
+name: Multi OS
+
+on: [push, workflow_dispatch]
+
+jobs:
+  os-check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Show platform
+        run: echo "Runner platform: $RUNNER_OS"
+
+      - name: Windows-specific command
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: Write-Output "PowerShell on Windows"
+
+      - name: macOS Swift check
+        if: runner.os == 'macOS'
+        run: swift --version
