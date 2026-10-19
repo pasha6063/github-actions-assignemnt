@@ -1,0 +1,30 @@
+name: Contexts and Conditions
+
+on: [push, workflow_dispatch]
+
+env:
+  APP_LABEL: "Ubuntu Actions Demo"
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print context
+        run: |
+          echo "Actor: ${{ github.actor }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Runner OS: ${{ runner.os }}"
+          echo "App: $APP_LABEL"
+
+      - name: Run after success
+        if: success()
+        run: echo "Previous step succeeded"
+
+      - name: Always report
+        if: always()
+        run: echo "This step runs regardless of earlier status"
+
+      - name: Example contains expression
+        if: contains(github.event_name, 'push')
+        run: echo "This was a push event"
