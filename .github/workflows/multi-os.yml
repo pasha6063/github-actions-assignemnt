@@ -1,27 +1,23 @@
-name: Multi OS
 
-'on':
+name: Multi OS Workflow
+
+on:
   push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
-  os-check:
+  test:
     strategy:
-      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Show platform
-        run: echo "Runner platform: $RUNNER_OS"
+      - name: Show operating system
+        run: echo "Running on ${{ matrix.os }}"
 
-      - name: Windows-specific command
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: Write-Output "PowerShell on Windows"
-
-      - name: macOS Swift check
-        if: runner.os == 'macOS'
-        run: swift --version
+      - name: Show system information
+        run: |
+          echo "GitHub Actions runner is working"
+          echo "Operating system: ${{ runner.os }}"
