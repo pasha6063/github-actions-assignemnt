@@ -1,0 +1,34 @@
+name: Manual Greeting
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Person to greet"
+        required: true
+        type: string
+
+      greeting:
+        description: "Greeting text"
+        required: true
+        default: "Hello"
+        type: string
+
+      data:
+        description: "Additional note"
+        required: false
+        type: string
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print inputs
+        env:
+          PERSON: ${{ inputs.name }}
+          GREETING: ${{ inputs.greeting }}
+          EXTRA_DATA: ${{ inputs.data }}
+        run: |
+          echo "$GREETING, $PERSON"
+          echo "Additional data: $EXTRA_DATA"
